@@ -3,13 +3,15 @@ import App from './App.vue'
 import router from './router'
 import ArticleForm from './components/ArticleForm.vue'
 import store from './store'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
 Vue.component('ArticleForm', ArticleForm);
 
 
 Vue.config.productionTip = false
-
-store.dispatch('fetchArticles');
+Vue.use(VueAxios, axios)
+// store.dispatch('fetchArticles');
 
 new Vue({
   router,

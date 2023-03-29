@@ -1,11 +1,17 @@
 <template>
-     <ArticleForm title="New title" body="" author="" published= "" v-on:addArticle="addArticle" />
+    <div class="hello">
+        <h1>{{msg}}</h1>
+        <ArticleForm title="New title" body="" author="" published= "" v-on:addArticle="addArticle" />
+    </div>
+    
 </template>
 
 <script>
 
 import ArticleForm from '@/components/ArticleForm.vue'
 import store from '../store'
+import axios from 'axios';
+
 export default {
     components: {
         ArticleForm
@@ -16,10 +22,29 @@ export default {
                 id: store.state.articles.length+1,
                 ...article
             }
+            // store.commit('addArticle', newArticle);
+            // console.log(article.title);
+            // this.$router.push('/');
+            let data = {
+            title: newArticle.title,
+            author: newArticle.author,
+            body: newArticle.body,
+            published: newArticle.published
+            };
+            // Отправляем запрос POST на сервер с помощью Axios
+        
+        axios.post('http://localhost:10000/articles', data)
+          .then(response => {
+            console.log(response);
             store.commit('addArticle', newArticle);
-            console.log(article.title);
-            this.$router.push('/');
+            
+          })
+          .catch(error => {
+            console.log(error);
+          });
+        this.$router.push('/articles');
         }
+
     }
     
 };
