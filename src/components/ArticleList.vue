@@ -1,6 +1,15 @@
 <template>
     <div class="hello">
-        <div v-if="loading" class="loader"></div>
+        
+        <div v-if="loading" >
+            <!-- <v-progress-circular color="blue-lighten-3" indeterminate></v-progress-circular> -->
+            <v-progress-circular
+            color="yellow"
+            indeterminate
+            :size="40"
+            :width="6"
+            ></v-progress-circular>
+        </div>
         <ul v-if="!loading">
             <div v-if="articles.length">
                 <ArticleBlock
@@ -17,27 +26,8 @@
                 No articles in the list.
             </p>
         </ul>
-    <button v-if="loading" @click="cancelRequest">Cancel</button>
-    <div v-if="errorMessage">{{ errorMessage }}</div>
-
-      <!-- <h1>{{ msg }}</h1>
-      <ul v-if="articles.length">
-        <ArticleBlock
-          v-for="article in articles" 
-          :key="article.id"
-          :title="article.title"
-          :body="article.body"
-          :published="article.published"
-          :author="article.author"
-          v-on:state="article.published=!article.published"
-        />
-      </ul>
-      <p v-else>
-        No articles in the list.
-      </p>
-      <div>ВСЕГО СТАТЕЙ: </div> -->
-      
-      <!-- <ArticleForm title="New title" body="" author="" published= "" v-on:add-article="addArticle" /> -->
+        <button v-if="loading" @click="cancelRequest">Cancel</button>
+        <div v-if="errorMessage">{{ errorMessage }}</div>
     </div>
   </template>
   
@@ -45,7 +35,6 @@
 import ArticleBlock from './ArticleBlock.vue'
 import axios from 'axios';
 import {loadArticles} from '@/services/articlesService'
-// import store from '../store'
 
 export default{
     name: 'ArticleList',
@@ -55,23 +44,10 @@ export default{
     components: {
         ArticleBlock
     },
-
-    computed: 
-    {
-        // getArticles(){
-        //     return store.state.articles
-        // },
-        // countArticles(){
-        //     return store.state.articles.length
-        // }
-
-    },
-    
+   
     data() {
         
-        return {
-            // articles: store.state.articles
-            // count: countArticles()   
+        return { 
             articles: [],
             loading: false,
             cancelTokenSource: null,
@@ -79,7 +55,6 @@ export default{
         }
         
     },
-
     methods:
     {
          loadArticles: async function(){
@@ -98,19 +73,7 @@ export default{
             })
             .finally(() => {
                 this.loading = false;
-            });
-            // this.cancelTokenSource=axios.cancelToken.source();
-            // try{
-            //     // console.log("get it");
-            //     const response = await axios.get('http://localhost:10000/articles')                
-            //     this.articles = response.data;
-                
-            // }
-            // catch(error){
-            //     console.error(error);
-            // }
-
-            // this.loading = false;         
+            });   
             
         },
         cancelRequest() {
@@ -118,14 +81,6 @@ export default{
             this.cancelTokenSource.cancel('Request cancelled');
             }
         }
-        // addArticle: function (article) {
-        //     let newArticle = {
-        //         id: this.articles.length+1,
-        //         ...article
-        //     }
-        //     this.articles.push(newArticle);
-        //     console.log(article.title);
-        // }
     },
     
     beforeMount()  {
@@ -133,35 +88,3 @@ export default{
     }
     };
 </script>
-
-<style scoped>
-h3{
-    margin:40px 0 0;
-}
-ul {
-    list-style-type: none;
-    padding:0;
-}
-li {
-    display: inline-block;
-    margin:0 10px;
-}
-a {
-    color: #42b983;
-}
-
-.loader {
-  border: 16px solid #f3f3f3;
-  border-top: 16px solid #3498db;
-  border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  animation: spin 2s linear infinite;
-  margin-left: auto;
-  margin-right: auto;
-}
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-</style>

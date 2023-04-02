@@ -7,6 +7,27 @@
       "body": "Learn Vue",
       "published": true,
       "author": "Автор 1"
+    },
+    {
+      "id": 2,
+      "title": "Title 2",
+      "body": "texttext",
+      "published": false,
+      "author": "Автор 2"
+    },
+    {
+      "id": 3,
+      "title": "Title 3",
+      "body": "Info about article 3",
+      "published": true,
+      "author": "Автор 3"
+    },
+    {
+      "id": 4,
+      "title": "Title 4",
+      "body": "Learn Vue",
+      "published": true,
+      "author": "Автор 1"
     }
   ]
 }
