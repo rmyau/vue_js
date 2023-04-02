@@ -1,6 +1,5 @@
 {
-  "articles": 
-  [
+  "articles": [
     {
       "id": 1,
       "title": "Title 1",
@@ -28,6 +27,13 @@
       "body": "Learn Vue",
       "published": true,
       "author": "Автор 1"
+    },
+    {
+      "title": "Заголовок какой-то",
+      "author": "Автор абабабаб",
+      "body": "проараораоар\nаолаоалоалаоа\nалволвлщыдды",
+      "published": "1",
+      "id": 5
     }
   ]
 }

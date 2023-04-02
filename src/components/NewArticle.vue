@@ -1,6 +1,5 @@
 <template>
-    <div class="hello">
-        <h1>{{msg}}</h1>
+    <div>
         <ArticleForm title="New title" body="" author="" published= "" v-on:addArticle="addArticle" />
     </div>
     
@@ -22,9 +21,7 @@ export default {
                 id: store.state.articles.length+1,
                 ...article
             }
-            // store.commit('addArticle', newArticle);
-            // console.log(article.title);
-            // this.$router.push('/');
+
             let data = {
             title: newArticle.title,
             author: newArticle.author,
@@ -42,7 +39,7 @@ export default {
           .catch(error => {
             console.log(error);
           });
-        this.$router.push('/articles');
+        this.$router.push('/');
         }
 
     }
@@ -50,7 +47,4 @@ export default {
 };
 </script>
 
-<style scoped>
-
-</style>
 
