@@ -22,6 +22,9 @@ export default {
                 ...article
             }
 
+            // if (newArticle.published===null)
+            // newArticle.published = false;
+            // else newArticle.published = true;
             let data = {
             title: newArticle.title,
             author: newArticle.author,

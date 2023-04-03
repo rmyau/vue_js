@@ -16,13 +16,12 @@
     </v-app-bar>
     
     <v-main app>
-      
       <v-layout>
         <v-navigation-drawer
           expand-on-hover
           rail
         >
-          <v-list density="compact" nav>
+          <v-list>
             <v-list-item color="primary" :to="'/'">
               <v-icon>mdi-text-long</v-icon>
               <v-list-item-content>
@@ -44,18 +43,8 @@
           </v-list>
         </v-navigation-drawer>
 
+        
         <router-view/>
-        <!-- <v-container>
-        <v-row>
-          <v-col
-            v-for="n in 24"
-            :key="n"
-            cols="4"
-          >
-            <v-card height="200"></v-card>
-          </v-col>
-        </v-row>
-      </v-container> -->
       </v-layout>
       
     </v-main>

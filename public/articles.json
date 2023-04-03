@@ -32,8 +32,71 @@
       "title": "Заголовок какой-то",
       "author": "Автор абабабаб",
       "body": "проараораоар\nаолаоалоалаоа\nалволвлщыдды",
-      "published": "1",
+      "published": true,
       "id": 5
+    },
+    {
+      "title": "Заголовок какой-то",
+      "author": "Автор абабабаб",
+      "body": "проараораоар\nаолаоалоалаоа\nалволвлщыдды",
+      "published": true,
+      "id": 6
+    },
+    {
+      "title": "тест 1 ",
+      "author": "не опубл",
+      "body": "аааааа",
+      "published": true,
+      "id": 7
+    },
+    {
+      "title": "New title",
+      "author": "jjjj",
+      "body": "jkjkjk",
+      "published": false,
+      "id": 8
+    },
+    {
+      "title": "New title",
+      "author": "dddd",
+      "body": "eeeeeee",
+      "published": false,
+      "id": 9
+    },
+    {
+      "title": "New title",
+      "author": "true true",
+      "body": "hfhfhfh",
+      "published": true,
+      "id": 10
+    },
+    {
+      "title": "New title",
+      "author": "falseeee",
+      "body": "false",
+      "published": true,
+      "id": 11
+    },
+    {
+      "title": "New title",
+      "author": "faaaaaaaalsed",
+      "body": "",
+      "published": true,
+      "id": 12
+    },
+    {
+      "title": "New title",
+      "author": "test false",
+      "body": "",
+      "published": false,
+      "id": 13
+    },
+    {
+      "title": "New title",
+      "author": "test true",
+      "body": "",
+      "published": true,
+      "id": 14
     }
   ]
 }

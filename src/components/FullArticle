@@ -1,0 +1,40 @@
+<template>
+    <ArticleBlock
+        :title="article.title"
+        :body="article.body"
+        :published="article.published"
+        :author="article.author"
+       
+    />   
+    <!-- v-on:state="article.published=!article.published" -->
+</template>
+
+<script>
+
+export default {
+    name: 'FullArticle',
+    props: {
+        id: {
+    type:Number,
+      required: true
+    }
+    },
+
+    computed: {
+        
+        article() {
+            console.log(`${typeof(this.id)}`)
+        return this.$store.state.articles.find(article => article.id === Number(this.id))
+        }
+    },
+    
+    beforeMount()  {
+        this.article();
+    }
+
+    
+};
+</script>
+
+
+

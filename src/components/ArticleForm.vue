@@ -25,7 +25,6 @@
 
           <v-checkbox
             v-model="article.published"
-            value="true"
             label="Опубликовать"
             type="checkbox"
             ></v-checkbox>

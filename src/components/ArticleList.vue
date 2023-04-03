@@ -1,8 +1,6 @@
 <template>
     <div class="hello">
-        
         <div v-if="loading" >
-            <!-- <v-progress-circular color="blue-lighten-3" indeterminate></v-progress-circular> -->
             <v-progress-circular
             color="yellow"
             indeterminate
@@ -10,17 +8,28 @@
             :width="6"
             ></v-progress-circular>
         </div>
+
         <ul v-if="!loading">
             <div v-if="articles.length">
-                <ArticleBlock
-                    v-for="article in articles" 
-                    :key="article.id"
-                    :title="article.title"
-                    :body="article.body"
-                    :published="article.published"
-                    :author="article.author"
-                    v-on:state="article.published=!article.published"
-                />
+                <v-container>
+                    <v-row>
+                    <v-col
+                        v-for="article in articles"
+                        :key="article.id"
+                        cols="4"
+                    >
+                        <v-card height="150" width = 400
+                        :color="cardColor(article)"
+                        >
+                            <v-btn :to="'/articles/' + article.id"
+                            >{{ article.title }}</v-btn>
+                            <v-card-subtitle>{{article.author}}</v-card-subtitle>
+                        </v-card>
+                        
+                    </v-col>
+                    </v-row>
+                </v-container>
+               
             </div>
             <p v-else>
                 No articles in the list.
@@ -30,9 +39,12 @@
         <div v-if="errorMessage">{{ errorMessage }}</div>
     </div>
   </template>
+
+   
+                <!-- v-on:state="article.published=!article.published" -->
   
   <script>
-import ArticleBlock from './ArticleBlock.vue'
+
 import axios from 'axios';
 import {loadArticles} from '@/services/articlesService'
 
@@ -42,7 +54,6 @@ export default{
         msg:String
     },
     components: {
-        ArticleBlock
     },
    
     data() {
@@ -66,6 +77,7 @@ export default{
             loadArticles(this.cancelTokenSource)
             .then(data => {
                 this.articles = data;
+                this.$store.state.articles = data;
             })
             .catch(error => {
                 console.error(error);
@@ -80,8 +92,16 @@ export default{
             if (this.loading && this.cancelTokenSource) {
             this.cancelTokenSource.cancel('Request cancelled');
             }
+        },
+        cardColor(article) {
+        if (article.published) {
+            return "green"; 
+        } else {
+            return "red"; 
         }
+        },
     },
+
     
     beforeMount()  {
         this.loadArticles();

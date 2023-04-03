@@ -1,16 +1,13 @@
 <template>
-    <div v-bind:class="{div_form: !(published)}">
-    <h3  > {{title}} </h3>
-    <div>
-        {{body}}
-    </div>
-    <br>
-    <div> {{upperAuthor}}</div>
-    <br>
-    <div> {{published}}</div>
-    <!-- <input type="checkbox" v-model="published"> -->
-    <button v-on:click.prevent="$emit('state')"> Опубликовать </button>
-    </div>
+     <v-text-field
+
+            v-model="article.title"
+            :counter="50"
+            label="Title"
+            required
+          ></v-text-field>
+    
+
 </template>
 
 <script>
@@ -18,16 +15,22 @@
 export default {
     name: 'ArticleBlock',
     props: {
-        title: String,
-        body: String,
-        published: Boolean,
-        author: String
+        id: {
+    type:Number,
+      required: true
+    }
+        
     },
-
+    
     computed: {
         upperAuthor(){
             return this.author.toUpperCase();
+        },
+        article() {
+            console.log(`${this.$store.state.articles}`)
+        return this.$store.state.articles.find(article => article.id === Number(this.id))
         }
+        
     },
 
     watch: {
@@ -35,19 +38,13 @@ export default {
         {
             console.log(`${newVal} ${oldVal}`);
         }
-    }
+    },
+    
+    
+
 
 };
 </script>
 
-<style scoped>
-/* div{
-    color: red;
-    
-} */
-/* 
-h3 {
-    color: #999;
-} */
-</style>
+
 
