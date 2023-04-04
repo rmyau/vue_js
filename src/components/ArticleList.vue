@@ -1,5 +1,5 @@
 <template>
-    <div class="hello">
+    <div >
         <div v-if="loading" >
             <v-progress-circular
             color="yellow"
@@ -18,24 +18,44 @@
                         :key="article.id"
                         cols="4"
                     >
-                        <v-card height="150" width = 400
+                        <v-card height="auto" 
                         :color="cardColor(article)"
-                        >
-                            <v-btn :to="'/articles/' + article.id"
-                            >{{ article.title }}</v-btn>
-                            <v-card-subtitle>{{article.author}}</v-card-subtitle>
-                        </v-card>
                         
+                        >
+                            <v-card-title 
+                            >{{ article.title }}</v-card-title>
+                            <v-card-subtitle>{{article.author}}</v-card-subtitle>
+                            <v-card-actions>
+                                <v-btn  
+                                text
+                                color="black"
+                                :to="'/articles/' + article.id">
+                                Подробнее
+                                </v-btn>
+
+                                <v-spacer></v-spacer>
+
+                                <v-btn 
+                                color="black" 
+                                text
+                                small 
+                                dark
+                                @click="togglePublishedState(article)">
+                                {{ article.published ? 'Снять с публикации' : 'Опубликовать' }}
+                                </v-btn>
+                            </v-card-actions>
+                        </v-card>
                     </v-col>
                     </v-row>
                 </v-container>
-               
             </div>
             <p v-else>
                 No articles in the list.
             </p>
+                        
         </ul>
-        <button v-if="loading" @click="cancelRequest">Cancel</button>
+        
+        <v-btn v-if="loading" @click="cancelRequest">Cancel</v-btn>
         <div v-if="errorMessage">{{ errorMessage }}</div>
     </div>
   </template>
@@ -47,6 +67,7 @@
 
 import axios from 'axios';
 import {loadArticles} from '@/services/articlesService'
+import store from '../store'
 
 export default{
     name: 'ArticleList',
@@ -100,6 +121,17 @@ export default{
             return "red"; 
         }
         },
+        togglePublishedState(article) {
+           
+            const newPublishedState = !article.published
+            console.log(`${store.state.articles}`)
+            axios.patch(`http://localhost:10000/articles/${article.id}`, { published: newPublishedState })
+          .then(response => {
+            console.log(response);
+            store.dispatch('CHANGE_ARTICLE_PUBLISHED', { articleId: article.id, published: !article.published })            
+          })
+        
+        }
     },
 
     

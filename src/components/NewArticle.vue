@@ -21,10 +21,6 @@ export default {
                 id: store.state.articles.length+1,
                 ...article
             }
-
-            // if (newArticle.published===null)
-            // newArticle.published = false;
-            // else newArticle.published = true;
             let data = {
             title: newArticle.title,
             author: newArticle.author,

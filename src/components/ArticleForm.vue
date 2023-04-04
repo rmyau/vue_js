@@ -1,6 +1,7 @@
 <template>
-    <v-form>
-        <v-container>
+    <v-dialog v-model="dialog" width="">
+        <v-card>
+            <v-container>
             <v-text-field
             v-model="article.title"
             :counter="50"
@@ -30,22 +31,18 @@
             ></v-checkbox>
           <v-btn
             type="submit"
+            @click="dialog = false"
             v-on:click.prevent="$emit('addArticle',article)"
             >
             Отправить
             </v-btn>
         </v-container>
-    </v-form>
-    <!-- <div>
-        <h2>Добавить статью</h2>
-        <form style="text-align: center">
-            <div><input type="text" v-model="article.title" placeholder="Title"></div>
-            <div><input type="text" v-model="article.author" placeholder="Author"></div>
-            <div><textarea v-model="article.body" placeholder="Body"></textarea></div>
-            <div><label><input type="checkbox" v-model="article.published">Published</label></div>
-            <div><input type="submit" value="Add" v-on:click.prevent="$emit('addArticle',article)"></div>
-        </form>
-    </div> -->
+        </v-card>
+      
+    
+    </v-dialog>
+    
+    
 </template>
 
 <script>
@@ -64,7 +61,8 @@ export default {
                 body: this.body,
                 author: this.author,
                 published: this.published
-            }
+            }, 
+            dialog: true
         }
     }
 };
